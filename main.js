@@ -1,3 +1,14 @@
+// ✅ Apply saved UI settings before anything else
+const saved = localStorage.getItem("ui-settings");
+if (saved) {
+  const settings = JSON.parse(saved);
+  const root = document.documentElement;
+  if (settings.font) root.style.setProperty("--font-main", `'${settings.font}', sans-serif`);
+  if (settings.background) root.style.setProperty("--color-bg", settings.background);
+  if (settings.text) root.style.setProperty("--color-text", settings.text);
+  if (settings.accent) root.style.setProperty("--color-accent", settings.accent);
+}
+
 import SceneManager from "./scenes/SceneManager.js";
 import BusinessSetupScene from "./scenes/BusinessSetupScene.js";
 import GameScene from "./scenes/GameScene.js";
@@ -15,7 +26,6 @@ canvas.height = window.innerHeight;
 const sceneManager = new SceneManager(ctx);
 window.sceneManager = sceneManager;
 
-// Register all scenes BEFORE starting
 sceneManager.addScene("BusinessSetupScene", new BusinessSetupScene());
 sceneManager.addScene("GameScene", new GameScene());
 sceneManager.addScene("LedgerScene", new LedgerScene());
