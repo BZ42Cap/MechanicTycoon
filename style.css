@@ -1,12 +1,15 @@
 :root {
   --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   --color-bg: #121212;
   --color-panel: #1f1f1f;
   --color-border: #333;
   --color-text: #ffffff;
   --color-muted: #888888;
+
   --color-accent: #00aaff;
   --color-accent-hover: #008ecc;
+
   --color-button-disabled: #444444;
   --color-table-alt-row: #2a2a2a;
 }
@@ -30,9 +33,10 @@ canvas {
 
 div {
   box-sizing: border-box;
+  font-family: var(--font-main);
 }
 
-div.ui-container {
+.ui-container {
   position: absolute;
   top: 50px;
   left: 50px;
@@ -44,6 +48,7 @@ div.ui-container {
   color: var(--color-text);
   z-index: 10;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-main);
 }
 
 input[type="text"] {
@@ -53,24 +58,23 @@ input[type="text"] {
   border-radius: 5px;
   border: 1px solid #555;
   background-color: #2a2a2a;
-  color: #fff;
+  color: var(--color-text);
   font-size: 16px;
   z-index: 10;
   position: relative;
+  font-family: var(--font-main);
 }
 
 h1, h2, h3 {
   margin-top: 0;
   color: var(--color-accent);
-}
-
-p {
-  line-height: 1.5;
+  font-family: var(--font-main);
 }
 
 label {
   display: block;
   margin-bottom: 8px;
+  font-family: var(--font-main);
 }
 
 button {
@@ -82,6 +86,7 @@ button {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s ease;
+  font-family: var(--font-main);
 }
 
 button:hover {
@@ -97,6 +102,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  font-family: var(--font-main);
 }
 
 th, td {
