@@ -1,144 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto Mechanic Game - Job Board</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    h2 {
-      color: #333;
-    }
-    #job-board {
-      margin-bottom: 30px;
-    }
-    #job-list li {
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    #scheduled-jobs li {
-      margin-bottom: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Mechanic Game</title>
+    <link rel="stylesheet" href="style.css"> <!-- Ensure correct path for CSS -->
 </head>
 <body>
 
-  <div id="job-board">
-    <h2>Job Board</h2>
-    <ul id="job-list">
-      <!-- Available jobs will be dynamically listed here -->
+    <div id="job-board">
+        <h2>Job Board</h2>
+        <ul id="job-list">
+            <!-- Available jobs will be dynamically listed here -->
+        </ul>
+    </div>
+
+    <h2>Scheduled Jobs</h2>
+    <ul id="scheduled-jobs">
+        <!-- Scheduled jobs will appear here -->
     </ul>
-  </div>
 
-  <h2>Scheduled Jobs</h2>
-  <ul id="scheduled-jobs">
-    <!-- Scheduled jobs will appear here -->
-  </ul>
-
-  <script>
-    // Sample job data
-    const jobs = [
-      {
-        id: 1,
-        vehicle: 'Toyota Camry 2005',
-        issue: 'Engine Misfire',
-        time: '2 hours',
-        payment: '$200',
-      },
-      {
-        id: 2,
-        vehicle: 'Ford F-150 2010',
-        issue: 'Brakes Squealing',
-        time: '1.5 hours',
-        payment: '$150',
-      },
-      {
-        id: 3,
-        vehicle: 'Honda Accord 2018',
-        issue: 'Overheating Engine',
-        time: '3 hours',
-        payment: '$250',
-      },
-    ];
-
-    // Scheduled jobs array (initial state)
-    let scheduledJobs = [];
-
-    // Function to display available jobs on the job board
-    const jobList = document.getElementById('job-list');
-    function displayJobBoard() {
-      jobList.innerHTML = ''; // Clear the job list first
-      jobs.forEach(job => {
-        const jobItem = document.createElement('li');
-        jobItem.innerHTML = `
-          <h3>${job.vehicle}</h3>
-          <p>Issue: ${job.issue}</p>
-          <p>Estimated Time: ${job.time}</p>
-          <p>Payment: ${job.payment}</p>
-          <button class="take-job" data-id="${job.id}">Take Job</button>
-        `;
-        jobList.appendChild(jobItem);
-      });
-    }
-
-    // Function to display scheduled jobs
-    const scheduledJobsContainer = document.getElementById('scheduled-jobs');
-    function displayScheduledJobs() {
-      scheduledJobsContainer.innerHTML = ''; // Clear previous list
-      scheduledJobs.forEach(scheduledJob => {
-        const scheduledItem = document.createElement('li');
-        const job = jobs.find(j => j.id === scheduledJob.jobId);
-        scheduledItem.innerHTML = `
-          <h3>${job.vehicle}</h3>
-          <p>Scheduled: ${new Date(scheduledJob.startTime).toLocaleString()} - ${new Date(scheduledJob.endTime).toLocaleString()}</p>
-        `;
-        scheduledJobsContainer.appendChild(scheduledItem);
-      });
-    }
-
-    // Function to handle taking a job
-    function handleTakeJob(event) {
-      const jobId = parseInt(event.target.dataset.id);
-      scheduleJob(jobId);
-    }
-
-    // Function to schedule a job
-    function scheduleJob(jobId) {
-      const job = jobs.find(j => j.id === jobId);
-      const startTime = new Date();
-      const endTime = new Date(startTime.getTime() + 1000 * 60 * 60 * parseFloat(job.time)); // Add estimated time to the start time
-      const scheduledJob = {
-        jobId,
-        startTime: startTime.toISOString(),
-        endTime: endTime.toISOString(),
-      };
-      scheduledJobs.push(scheduledJob);
-      displayScheduledJobs();  // Update the UI with the new scheduled job
-    }
-
-    // Initialize job board and add event listeners to job buttons
-    function init() {
-      displayJobBoard(); // Display the available jobs
-      document.querySelectorAll('.take-job').forEach(button => {
-        button.addEventListener('click', handleTakeJob); // Attach event listeners to "Take Job" buttons
-      });
-    }
-
-    // Initial call to render job board and scheduled jobs
-    init();
-  </script>
-
+    <script src="main.js"></script> <!-- Ensure correct path for JavaScript -->
+    <script src="scenes/JobBoardScene.js"></script> <!-- If this file exists -->
+    <script src="systems/CalendarSystem.js"></script> <!-- If this file exists -->
+    <script src="systems/TimeSystem.js"></script> <!-- If this file exists -->
 </body>
 </html>
