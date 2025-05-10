@@ -24,7 +24,6 @@ export default class GameScene {
 
     window.finances = Finances;
 
-    // Prevent multiple listeners
     if (!this._keyBound) {
       document.addEventListener("keydown", this.handleKey.bind(this));
       this._keyBound = true;
@@ -62,17 +61,17 @@ export default class GameScene {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    // Background
-    ctx.fillStyle = "#0e0e0e";
+    // ✅ Use CSS variable for background color
+    const bgColor = getComputedStyle(document.documentElement).getPropertyValue("--color-bg") || "#0e0e0e";
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, width, height);
 
-    // HUD Panel
+    // HUD panel
     ctx.fillStyle = "rgba(20, 20, 20, 0.85)";
     ctx.fillRect(10, 10, width - 20, 120);
 
-    // HUD Text
     ctx.fillStyle = "#ffffff";
-    ctx.font = "18px sans-serif";
+    ctx.font = "18px var(--font-main)";
 
     ctx.fillText(
       `${this.business.garageName} | Owner: ${this.business.ownerName} | Location: ${this.business.location}`,
@@ -98,18 +97,17 @@ export default class GameScene {
       110
     );
 
-    // Main Text
     ctx.fillStyle = "lime";
-    ctx.font = "48px sans-serif";
+    ctx.font = "48px var(--font-main)";
     ctx.fillText("Game Started", 100, 180);
 
-    ctx.font = "16px sans-serif";
+    ctx.font = "16px var(--font-main)";
     ctx.fillStyle = "gray";
     ctx.fillText("P: Pay | L: Ledger | X: XP | J: Job Board | C: Calendar | S: Settings", 100, 220);
 
-    // Scheduled Jobs Preview
+    // Scheduled jobs
     const jobs = CalendarSystem.getSchedule();
-    ctx.font = "16px sans-serif";
+    ctx.font = "16px var(--font-main)";
     ctx.fillStyle = "#aaa";
 
     jobs.forEach((entry, i) => {
