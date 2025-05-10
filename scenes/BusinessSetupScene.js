@@ -32,14 +32,12 @@ export default class BusinessSetupScene {
         return;
       }
 
-      // Save the business data globally
       window.businessData = {
         garageName,
         ownerName,
         location
       };
 
-      // Remove form and load game
       document.body.removeChild(this.container);
       window.sceneManager.loadScene("GameScene");
     };
