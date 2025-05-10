@@ -1,23 +1,23 @@
 body {
     font-family: Arial, sans-serif;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-h2 {
-    color: #333;
-}
-
-#job-board, #scheduled-jobs {
-    margin-bottom: 30px;
-}
-
-#job-list li, #scheduled-jobs li {
-    margin-bottom: 20px;
-    padding: 10px;
+#game-container {
+    width: 80%;
+    height: 80%;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button {
@@ -26,6 +26,7 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 button:hover {

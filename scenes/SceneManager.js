@@ -1,38 +1,38 @@
 class SceneManager {
-  constructor(ctx) {
-    this.ctx = ctx;
-    this.scenes = {};
-    this.current = null;
-  }
-
-  addScene(name, scene) {
-    this.scenes[name] = scene;
-  }
-
-  start(name) {
-    this.current = this.scenes[name];
-    if (this.current?.init) {
-      this.current.init();
+    constructor(ctx) {
+        this.ctx = ctx;
+        this.scenes = {};
+        this.current = null;
     }
-  }
 
-  update() {
-    if (this.current?.update) {
-      this.current.update();
+    addScene(name, scene) {
+        this.scenes[name] = scene;
     }
-  }
 
-  render() {
-    if (this.current?.render) {
-      this.current.render(this.ctx);
+    start(name) {
+        this.current = this.scenes[name];
+        if (this.current?.init) {
+            this.current.init();
+        }
     }
-  }
 
-  loadScene(name) {
-    if (this.scenes[name]) {
-      this.start(name);
+    update() {
+        if (this.current?.update) {
+            this.current.update();
+        }
     }
-  }
+
+    render() {
+        if (this.current?.render) {
+            this.current.render(this.ctx);
+        }
+    }
+
+    loadScene(name) {
+        if (this.scenes[name]) {
+            this.start(name);
+        }
+    }
 }
 
 export default SceneManager;
