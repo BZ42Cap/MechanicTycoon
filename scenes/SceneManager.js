@@ -17,7 +17,9 @@ class SceneManager {
   }
 
   update() {
-    // Optional update logic
+    if (this.current?.update) {
+      this.current.update();
+    }
   }
 
   render() {
