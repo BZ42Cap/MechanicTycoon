@@ -1,6 +1,6 @@
 export default class BusinessSetupScene {
     init() {
-        console.log("Business Setup Scene Loaded");
+        console.log("Business Setup Scene Initialized");
 
         this.container = document.createElement("div");
         this.container.classList.add("ui-container");
@@ -9,17 +9,13 @@ export default class BusinessSetupScene {
             <h2>Start Your Auto Repair Business</h2>
             <label>Garage Name:</label>
             <input type="text" id="garageName" placeholder="e.g. Apex Auto Repair" />
-
             <label>Owner Name:</label>
             <input type="text" id="ownerName" placeholder="e.g. Jay Myers" />
-
             <label>Location:</label>
             <input type="text" id="location" placeholder="e.g. Charlotte, NC" />
-
             <br /><br />
             <button id="startGame">Start Game</button>
         `;
-
         document.getElementById("game-container").appendChild(this.container);
 
         document.getElementById("startGame").onclick = () => {
