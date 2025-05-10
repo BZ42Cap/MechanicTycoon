@@ -1,12 +1,17 @@
-// ✅ Apply saved UI settings before anything else
-const saved = localStorage.getItem("ui-settings");
-if (saved) {
-  const settings = JSON.parse(saved);
+// ✅ Load saved UI + business settings
+const uiSaved = localStorage.getItem("ui-settings");
+if (uiSaved) {
+  const settings = JSON.parse(uiSaved);
   const root = document.documentElement;
   if (settings.font) root.style.setProperty("--font-main", `'${settings.font}', sans-serif`);
   if (settings.background) root.style.setProperty("--color-bg", settings.background);
   if (settings.text) root.style.setProperty("--color-text", settings.text);
   if (settings.accent) root.style.setProperty("--color-accent", settings.accent);
+}
+
+const bizSaved = localStorage.getItem("business-data");
+if (bizSaved) {
+  window.businessData = JSON.parse(bizSaved);
 }
 
 import SceneManager from "./scenes/SceneManager.js";
@@ -33,7 +38,12 @@ sceneManager.addScene("JobBoardScene", new JobBoardScene());
 sceneManager.addScene("ScheduleScene", new ScheduleScene());
 sceneManager.addScene("SettingsScene", new SettingsScene());
 
-sceneManager.start("BusinessSetupScene");
+// ✅ Start with setup if no saved business, otherwise jump to game
+if (window.businessData) {
+  sceneManager.start("GameScene");
+} else {
+  sceneManager.start("BusinessSetupScene");
+}
 
 function gameLoop() {
   sceneManager.update();

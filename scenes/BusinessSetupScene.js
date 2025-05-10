@@ -32,11 +32,15 @@ export default class BusinessSetupScene {
         return;
       }
 
-      window.businessData = {
+      const businessData = {
         garageName,
         ownerName,
         location
       };
+
+      // Save to memory and localStorage
+      window.businessData = businessData;
+      localStorage.setItem("business-data", JSON.stringify(businessData));
 
       document.body.removeChild(this.container);
       window.sceneManager.loadScene("GameScene");
@@ -52,3 +56,4 @@ export default class BusinessSetupScene {
     ctx.fillText("Mechanic Tycoon", 50, 60);
   }
 }
+
