@@ -24,35 +24,37 @@ export default class GameScene {
 
     window.finances = Finances;
 
-    document.addEventListener("keydown", this.handleKey.bind(this));
+    // Prevent multiple listeners
+    if (!this._keyBound) {
+      document.addEventListener("keydown", this.handleKey.bind(this));
+      this._keyBound = true;
+    }
   }
 
   handleKey(e) {
     const key = e.key.toLowerCase();
+    console.log(`Key pressed: ${key}`);
 
-    if (key === "l") {
-      window.sceneManager.loadScene("LedgerScene");
-    }
-
-    if (key === "p") {
-      Finances.paySelf(500);
-      console.log("You paid yourself $500");
-    }
-
-    if (key === "x") {
-      LevelSystem.addXP(50);
-    }
-
-    if (key === "j") {
-      window.sceneManager.loadScene("JobBoardScene");
-    }
-
-    if (key === "c") {
-      window.sceneManager.loadScene("ScheduleScene");
-    }
-
-    if (key === "s") {
-      window.sceneManager.loadScene("SettingsScene");
+    switch (key) {
+      case "p":
+        Finances.paySelf(500);
+        console.log("You paid yourself $500");
+        break;
+      case "l":
+        window.sceneManager.loadScene("LedgerScene");
+        break;
+      case "x":
+        LevelSystem.addXP(50);
+        break;
+      case "j":
+        window.sceneManager.loadScene("JobBoardScene");
+        break;
+      case "c":
+        window.sceneManager.loadScene("ScheduleScene");
+        break;
+      case "s":
+        window.sceneManager.loadScene("SettingsScene");
+        break;
     }
   }
 
@@ -96,7 +98,7 @@ export default class GameScene {
       110
     );
 
-    // Game Title Display
+    // Main Text
     ctx.fillStyle = "lime";
     ctx.font = "48px sans-serif";
     ctx.fillText("Game Started", 100, 180);
