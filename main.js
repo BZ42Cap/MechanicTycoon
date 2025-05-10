@@ -1,15 +1,20 @@
-import { GameLoop } from './engine/GameLoop.js';
-import { SceneManager } from './scenes/SceneManager.js';
+import SceneManager from "./scenes/SceneManager.js";
+import MainMenu from "./scenes/MainMenu.js";
 
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const sceneManager = new SceneManager();
-window.sceneManager = sceneManager;
+window.sceneManager = new SceneManager(ctx);
+window.sceneManager.addScene("MainMenu", new MainMenu());
+window.sceneManager.start("MainMenu");
 
-sceneManager.loadScene('MainMenu');
+function gameLoop() {
+  window.sceneManager.update();
+  window.sceneManager.render();
+  requestAnimationFrame(gameLoop);
+}
 
-GameLoop.start(canvas, ctx);
+gameLoop();

@@ -1,22 +1,16 @@
 :root {
-  /* ======= Fonts ======= */
   --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  /* ======= Colors ======= */
   --color-bg: #121212;
   --color-panel: #1f1f1f;
   --color-border: #333;
   --color-text: #ffffff;
   --color-muted: #888888;
-
   --color-accent: #00aaff;
   --color-accent-hover: #008ecc;
-
   --color-button-disabled: #444444;
   --color-table-alt-row: #2a2a2a;
 }
 
-/* ======= Global Layout ======= */
 body {
   margin: 0;
   padding: 0;
@@ -38,7 +32,6 @@ div {
   box-sizing: border-box;
 }
 
-/* ======= UI Containers ======= */
 div.ui-container {
   position: absolute;
   top: 50px;
@@ -53,7 +46,6 @@ div.ui-container {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* ======= Typography ======= */
 h1, h2, h3 {
   margin-top: 0;
   color: var(--color-accent);
@@ -68,7 +60,6 @@ label {
   margin-bottom: 8px;
 }
 
-/* ======= Buttons ======= */
 button {
   background-color: var(--color-accent);
   color: white;
@@ -89,7 +80,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* ======= Tables (Ledger, Schedule) ======= */
 table {
   width: 100%;
   border-collapse: collapse;
