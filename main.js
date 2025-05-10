@@ -1,7 +1,7 @@
-// ✅ Load saved UI + business settings
-const uiSaved = localStorage.getItem("ui-settings");
-if (uiSaved) {
-  const settings = JSON.parse(uiSaved);
+// ✅ Load saved UI settings
+const savedSettings = localStorage.getItem("ui-settings");
+if (savedSettings) {
+  const settings = JSON.parse(savedSettings);
   const root = document.documentElement;
   if (settings.font) root.style.setProperty("--font-main", `'${settings.font}', sans-serif`);
   if (settings.background) root.style.setProperty("--color-bg", settings.background);
@@ -9,9 +9,15 @@ if (uiSaved) {
   if (settings.accent) root.style.setProperty("--color-accent", settings.accent);
 }
 
-const bizSaved = localStorage.getItem("business-data");
-if (bizSaved) {
-  window.businessData = JSON.parse(bizSaved);
+// ✅ Load saved business info
+const savedBusiness = localStorage.getItem("businessData");
+if (savedBusiness) {
+  try {
+    window.businessData = JSON.parse(savedBusiness);
+  } catch (e) {
+    console.error("Invalid business data in storage", e);
+    window.businessData = null;
+  }
 }
 
 import SceneManager from "./scenes/SceneManager.js";
@@ -31,6 +37,7 @@ canvas.height = window.innerHeight;
 const sceneManager = new SceneManager(ctx);
 window.sceneManager = sceneManager;
 
+// ✅ Register all scenes
 sceneManager.addScene("BusinessSetupScene", new BusinessSetupScene());
 sceneManager.addScene("GameScene", new GameScene());
 sceneManager.addScene("LedgerScene", new LedgerScene());
@@ -38,7 +45,7 @@ sceneManager.addScene("JobBoardScene", new JobBoardScene());
 sceneManager.addScene("ScheduleScene", new ScheduleScene());
 sceneManager.addScene("SettingsScene", new SettingsScene());
 
-// ✅ Start with setup if no saved business, otherwise jump to game
+// ✅ Start correct scene based on saved business info
 if (window.businessData) {
   sceneManager.start("GameScene");
 } else {
