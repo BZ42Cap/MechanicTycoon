@@ -61,8 +61,10 @@ export default class GameScene {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    // ✅ Use CSS variable for background color
-    const bgColor = getComputedStyle(document.documentElement).getPropertyValue("--color-bg") || "#0e0e0e";
+    // ✅ Get CSS background color variable and apply it safely
+    const rootStyles = getComputedStyle(document.documentElement);
+    let bgColor = rootStyles.getPropertyValue("--color-bg").trim();
+    if (!bgColor || bgColor === "") bgColor = "#0e0e0e";
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, width, height);
 
