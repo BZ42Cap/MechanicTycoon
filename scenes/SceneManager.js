@@ -1,22 +1,36 @@
-export class SceneManager {
-  constructor() {
-    this.currentScene = null;
+class SceneManager {
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.scenes = {};
+    this.current = null;
   }
 
-  async loadScene(name) {
-    const module = await import(`./${name}.js`);
-    const SceneClass = module.default;
-    this.setScene(new SceneClass());
+  addScene(name, scene) {
+    this.scenes[name] = scene;
   }
 
-  setScene(scene) {
-    this.currentScene = scene;
-    if (scene.init) {
-      scene.init();
+  start(name) {
+    this.current = this.scenes[name];
+    if (this.current?.init) {
+      this.current.init();
     }
   }
 
-  getScene() {
-    return this.currentScene;
+  update() {
+    // Optional update logic
+  }
+
+  render() {
+    if (this.current?.render) {
+      this.current.render(this.ctx);
+    }
+  }
+
+  loadScene(name) {
+    if (this.scenes[name]) {
+      this.start(name);
+    }
   }
 }
+
+export default SceneManager;
