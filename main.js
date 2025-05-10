@@ -8,14 +8,21 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-window.sceneManager = new SceneManager(ctx);
-window.sceneManager.addScene("BusinessSetupScene", new BusinessSetupScene());
-window.sceneManager.addScene("GameScene", new GameScene());
-window.sceneManager.start("BusinessSetupScene");
+// Create and expose scene manager
+const sceneManager = new SceneManager(ctx);
+window.sceneManager = sceneManager;
 
+// Register scenes before starting
+sceneManager.addScene("BusinessSetupScene", new BusinessSetupScene());
+sceneManager.addScene("GameScene", new GameScene());
+
+// Start with business setup
+sceneManager.start("BusinessSetupScene");
+
+// Game loop
 function gameLoop() {
-  window.sceneManager.update();
-  window.sceneManager.render();
+  sceneManager.update();
+  sceneManager.render();
   requestAnimationFrame(gameLoop);
 }
 
